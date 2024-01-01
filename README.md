@@ -1,3 +1,13 @@
+# Provisioning with OpenTofu
+
+Execute:
+
+```sh
+tofu init
+tofu plan --var-file variables.tfvars
+tofu apply --var-file variables.tfvars  
+```
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

@@ -39,5 +39,3 @@ terraform.rc
 .DS_Store
 cred.txt
 /.env
-infra/.config
-.idea

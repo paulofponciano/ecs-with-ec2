@@ -1,7 +1,3 @@
-########################################################################################################################
-## ECS Task Definition
-########################################################################################################################
-
 resource "aws_ecs_task_definition" "default" {
   family             = "${var.namespace}_ECS_TaskDefinition_${var.environment}"
   execution_role_arn = aws_iam_role.ecs_task_execution_role.arn

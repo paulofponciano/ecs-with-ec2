@@ -1,7 +1,3 @@
-########################################################################################################################
-## Application Load Balancer in public subnets with HTTP default listener that redirects traffic to HTTPS
-########################################################################################################################
-
 resource "aws_alb" "alb" {
   name            = "${var.namespace}-ALB-${var.environment}"
   security_groups = [aws_security_group.alb.id]
@@ -13,15 +9,11 @@ resource "aws_alb" "alb" {
   }
 }
 
-########################################################################################################################
-## Default HTTPS listener
-########################################################################################################################
-
 resource "aws_alb_listener" "alb_default_listener_https" {
   load_balancer_arn = aws_alb.alb.arn
   port              = 443
   protocol          = "HTTPS"
-  certificate_arn = "arn:aws:acm:us-east-2:310240692520:certificate/bfbfe3ce-d347-4c42-8986-f45e95e04ca1"
+  certificate_arn = "arn:aws:acm:us-east-2:ACCOUNTID:certificate/bfbfe3ce-d347-4c42-8986-f45e95e04ca1"
   ssl_policy      = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
 
   default_action {
@@ -40,10 +32,6 @@ resource "aws_alb_listener" "alb_default_listener_https" {
   }
 }
 
-########################################################################################################################
-## Default HTTP listener
-########################################################################################################################
-
 resource "aws_lb_listener" "alb_listener_http_redirect" {
   load_balancer_arn = aws_alb.alb.arn
   port              = "80"
@@ -59,10 +47,6 @@ resource "aws_lb_listener" "alb_listener_http_redirect" {
     }
   }
 }
-
-########################################################################################################################
-## HTTPS Listener Rule
-########################################################################################################################
 
 resource "aws_alb_listener_rule" "https_listener_rule" {
   listener_arn = aws_alb_listener.alb_default_listener_https.arn
@@ -83,10 +67,6 @@ resource "aws_alb_listener_rule" "https_listener_rule" {
     Terraform = true
   }
 }
-
-########################################################################################################################
-## Target Group
-########################################################################################################################
 
 resource "aws_alb_target_group" "service_target_group" {
   name                 = "${var.namespace}-TargetGroup-${var.environment}"

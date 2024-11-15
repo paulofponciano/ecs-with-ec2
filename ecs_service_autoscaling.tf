@@ -1,7 +1,3 @@
-########################################################################################################################
-## Target Tracking on ECS Cluster Task level
-########################################################################################################################
-
 resource "aws_appautoscaling_target" "ecs_target" {
   max_capacity       = var.ecs_task_max_count
   min_capacity       = var.ecs_task_min_count
@@ -9,10 +5,6 @@ resource "aws_appautoscaling_target" "ecs_target" {
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 }
-
-########################################################################################################################
-## Policy for CPU tracking
-########################################################################################################################
 
 resource "aws_appautoscaling_policy" "ecs_cpu_policy" {
   name               = "${var.namespace}_CPUTargetTrackingScaling_${var.environment}"
@@ -29,10 +21,6 @@ resource "aws_appautoscaling_policy" "ecs_cpu_policy" {
     }
   }
 }
-
-########################################################################################################################
-## Policy for memory tracking
-########################################################################################################################
 
 resource "aws_appautoscaling_policy" "ecs_memory_policy" {
   name               = "${var.namespace}_MemoryTargetTrackingScaling_${var.environment}"

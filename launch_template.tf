@@ -1,7 +1,3 @@
-########################################################################################################################
-## AMI for an ECS-optimized Amazon Linux 2 instance
-########################################################################################################################
-
 data "aws_ami" "amazon_linux_2" {
   most_recent = true
 
@@ -22,10 +18,6 @@ data "aws_ami" "amazon_linux_2" {
 
   owners = ["amazon"]
 }
-
-########################################################################################################################
-## Launch template for all EC2 instances that are part of the ECS cluster
-########################################################################################################################
 
 resource "aws_launch_template" "ecs_launch_template" {
   name                   = "${var.namespace}_EC2_LaunchTemplate_${var.environment}"

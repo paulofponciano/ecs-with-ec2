@@ -1,7 +1,3 @@
-########################################################################################################################
-## Capacity Provider linked with ASG and ECS Cluster
-########################################################################################################################
-
 resource "aws_ecs_capacity_provider" "cas" {
   name = "${var.namespace}_ECS_CapacityProvider_${var.environment}"
 

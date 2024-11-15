@@ -1,7 +1,3 @@
-########################################################################################################################
-## SG for EC2 instances
-########################################################################################################################
-
 resource "aws_security_group" "ec2" {
   name        = "${var.namespace}_EC2_Instance_SecurityGroup_${var.environment}"
   description = "Security group for EC2 instances in ECS cluster"
@@ -29,10 +25,6 @@ resource "aws_security_group" "ec2" {
     Terraform = true
   }
 }
-
-########################################################################################################################
-## SG for ALB
-########################################################################################################################
 
 resource "aws_security_group" "alb" {
   name        = "${var.namespace}_ALB_SecurityGroup_${var.environment}"
